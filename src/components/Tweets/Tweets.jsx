@@ -17,14 +17,9 @@ const compareArr = (arrA, arrB, compareFunction) =>
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
-  const [filter, setFilter] = useState("Show all");
+  const [filter] = useState("Show all");
   const [following, setFollowings] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalHits, setTotalHits] = useState({
-    users: "users",
-    filter: "filter",
-    followings: "followings",
-  });
   const [indexLimit, setIndexLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,9 +44,8 @@ const Tweets = () => {
 
       setIsLoading(false);
     };
-
     fetchData();
-  }, [page]);
+  }, [page, following]);
 
   const handleFollow = async (userId) => {
     setFollowings((prevFollowings) => {
@@ -84,7 +78,7 @@ const Tweets = () => {
   const handleChangePage = () => {
     setPage((prevPage) => prevPage + 1);
     setIndexLimit((prevIndexLimit) => prevIndexLimit + 9);
-    setTotalHits((prevTotalHits) => prevTotalHits - 9);
+    // setTotalHits((prevTotalHits) => prevTotalHits - 9);
   };
 
   const filtredUsers = users
